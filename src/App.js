@@ -9,7 +9,7 @@ export default class App extends React.Component {
       <Router>
         <Routes>
           <Route path='/login' element={<Login/>}/>
-          <Route path='/' element={<Admin/>}/>
+          <Route path='/*' element={<Admin/>}/>
         </Routes>
       </Router>
     )

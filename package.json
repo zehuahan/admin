@@ -38,7 +38,12 @@
   "devDependencies": {
     "@craco/craco": "^6.4.5",
     "antd": "^4.23.2",
+    "axios": "^0.27.2",
     "craco-less": "^2.0.0",
-    "react-router-dom": "^6.4.1"
-  }
+    "jsonp": "^0.2.1",
+    "react-router": "^6.4.1",
+    "react-router-dom": "^6.4.1",
+    "store": "^2.0.12"
+  },
+  "proxy": "http://localhost:5000"
 }

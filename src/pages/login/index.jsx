@@ -1,20 +1,45 @@
 import React from 'react'
 import './login.less'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
+import { reqLogin } from '../../api'
+import memoryUtils from '../../utils/memoryUtils'
+import { Navigate, useNavigate } from 'react-router-dom'
+import storageUtils from '../../utils/storageUtils'
 
 export default function Login() {
-    const onFinish = (values) => {
-        console.log('Success:', values);
-    };
-
+    // 请求后台登陆
+    let navigate = useNavigate()
+    const onFinish = async (values) => {
+        let { username, password } = values
+        const result = await reqLogin(username, password)
+        // 判断登录是否成功
+        if (result.status === 0) {
+            // 登录成功
+            // 提示登录成功，保存用户登录信息，跳转到主页面
+            message.success('登陆成功')
+            // 保存用户数据
+            navigate('/')
+            const user = result.data
+            storageUtils.saveUser(user)
+            memoryUtils.user = user
+        }
+        // 跳转到后台管理路由(已经登录成功，不需要回退了)
+        // 如果用户已经登陆, 自动跳转到 admin
+        if (memoryUtils.user && memoryUtils.user._id) {
+            return <Navigate to='/' replace />
+        } else {
+            message.error(result.msg)
+        }
+        // 阻止页面回退
+    }
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
     return (
         <div className='login'>
             <header className='login-header'>
-                <img src={require('./images/logo.png')} alt="" />
+                <img src={require('../../assets/images/logo.png')} alt="" />
                 <h1>React项目：后台管理系统</h1>
             </header>
             <section className='login-content'>
