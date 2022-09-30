@@ -8,7 +8,7 @@ import menuList from '../../config/menuConfig'
 import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import  storageUtils  from '../../utils/storageUtils'
+import storageUtils from '../../utils/storageUtils'
 const date = new Date()
 const { confirm } = Modal;
 
@@ -30,7 +30,7 @@ export default function Header() {
         console.log('OK');
         // 删除保存的user数据
         storageUtils.removeUser()
-        memoryUtils.user={}
+        memoryUtils.user = {}
         // 跳转到login界面
         navigate('/login')
       }
@@ -55,6 +55,8 @@ export default function Header() {
         item.children.map((item) => {
           if (item.key === path.pathname) {
             setPage(item.title)
+          } else if (window.location.pathname.indexOf('/product') === 0) {
+            setPage('商品管理')
           }
         })
       }
@@ -62,10 +64,11 @@ export default function Header() {
   }
   useEffect(() => {
     getSysTime()
-    getWeather()
     getPage()
   })
-  // clearInterval(timer)
+  useEffect(() => {
+    getWeather()
+  },[])
   return (
     <div className='header'>
       <div className="header-top">

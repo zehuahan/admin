@@ -39,8 +39,8 @@ export default class LeftNav extends Component {
           <h1>硅谷后台</h1>
         </Link>
         <Menu
-          defaultSelectedKeys={window.location.pathname === '/' ? '/home' : window.location.pathname}   // 当前请求路径也就是key，默认显示的标签
-          defaultOpenKeys={[window.location.pathname === '/category' ? '/products':window.location.pathname==='/product' ? '/products': window.location.pathname.indexOf('/chart') === 0 ? '/charts' : '']}   // 默认展开
+          defaultSelectedKeys={window.location.pathname.indexOf('/product') !== -1 ? '/product' : window.location.pathname === '/' ? '/home' : window.location.pathname}   // 当前请求路径也就是key，默认显示的标签
+          defaultOpenKeys={[window.location.pathname === '/category' ? '/products' : window.location.pathname.indexOf('/product') !== -1 ? '/products' : window.location.pathname.indexOf('/chart') === 0 ? '/charts' : '']}   // 默认展开
           mode="inline"
           theme="dark"
         >

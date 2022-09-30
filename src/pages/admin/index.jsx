@@ -31,7 +31,7 @@ export default class Admin extends Component {
             <Routes>
               <Route path='/home' index element={<Home />} />
               <Route path='/category' element={<Category />} />
-              <Route path='/product' element={<Product />} />
+              <Route path='/product/*' element={<Product />} />
               <Route path='/role' element={<Role />} />
               <Route path='/user' element={<User />} />
               <Route path='/charts/bar' element={<Bar />} />
